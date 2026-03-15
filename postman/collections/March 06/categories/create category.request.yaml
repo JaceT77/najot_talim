@@ -1,0 +1,11 @@
+$kind: http-request
+name: create category
+url: "{{h}}category/create/"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name": "Product1"
+    }
+order: 3478714384930691

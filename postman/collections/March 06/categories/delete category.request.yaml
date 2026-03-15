@@ -1,0 +1,5 @@
+$kind: http-request
+name: delete category
+url: "{{h}}category/delete/4"
+method: POST
+order: 3657928647122568

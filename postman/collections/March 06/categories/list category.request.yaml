@@ -1,0 +1,5 @@
+$kind: http-request
+name: list category
+url: "{{h}}category/"
+method: GET
+order: 1773414473326

@@ -1,0 +1,11 @@
+$kind: http-request
+name: update category
+url: "{{h}}category/update/1"
+method: PUT
+body:
+  type: json
+  content: |
+    {
+        "name": "my product"
+    }
+order: 3730742145554445

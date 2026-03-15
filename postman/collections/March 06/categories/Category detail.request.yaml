@@ -1,0 +1,5 @@
+$kind: http-request
+name: Category detail
+url: "{{h}}category/1"
+method: GET
+order: 3652853542230119
