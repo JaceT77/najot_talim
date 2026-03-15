@@ -4,7 +4,7 @@ from typing import Optional, List
 class APIModel(BaseModel):
     model_config = ConfigDict(
         str_strip_whitespace=True,
-        from_attributes=True,  # allow returning SQLAlchemy objects from CRUD
+        from_attributes=True,
     )
 
 

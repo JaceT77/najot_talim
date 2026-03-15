@@ -14,8 +14,6 @@ async def async_client():
 
 @pytest_asyncio.fixture
 async def db_client():
-    # Uses whatever your app is configured to use in `.env` via `core.settings`.
-    # Note: this fixture creates and drops the project's tables.
     from core import settings
 
     from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
@@ -44,7 +42,6 @@ async def db_client():
         yield client
 
     app.dependency_overrides.clear()
-    # Clean up tables so repeated runs start from a blank state.
     async with test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
     await test_engine.dispose()
@@ -100,7 +97,6 @@ async def test_category_crud(db_client):
 
 @pytest.mark.asyncio
 async def test_product_crud(db_client):
-    # Need a category first
     r = await db_client.post("/api/category/create/", json={"name": "Electronics"})
     assert r.status_code == 201
     category_id = r.json()["id"]

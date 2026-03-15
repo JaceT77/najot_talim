@@ -4,8 +4,6 @@ from typing import Optional
 
 
 class Settings(BaseSettings):
-    # Use an APP_ prefix for all environment variables to avoid colliding with
-    # common system variables like DEBUG=release.
     DATABASE_URL: Optional[str] = None
     DB_NAME: Optional[str] = None
     DB_USER: Optional[str] = None
@@ -16,7 +14,6 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def validate_db_settings(self):
-        # Either supply a full DATABASE_URL, or all of the DB_* parts.
         if self.DATABASE_URL:
             return self
 
@@ -34,10 +31,8 @@ class Settings(BaseSettings):
 
     @property
     def database_url(self):
-        # Allow a single override for local/dev (e.g. sqlite) without changing code.
         if self.DATABASE_URL:
             return self.DATABASE_URL
-        # At this point validate_db_settings guarantees these are all present.
         return (
             f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}"
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
